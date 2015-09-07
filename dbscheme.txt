@@ -1,0 +1,172 @@
+Create DB schema for ConSova Clients
+Basic information to store for ConSova Clients
+
+Id
+Name
+Description
+Contact
+Email
+Phone
+Website
+Active
+Collection Employees
+Collection Surveys
+
+
+
+
+Create DB Schema for Working Spouse Rules
+Client may have multiple WSRs  Need to store the details of these rules and need to think up a way to administer them.
+
+Id
+Name
+Type
+Frequency
+Trigger
+Criteria
+
+
+
+
+Create DB Schema for ConSova Client's Employees (EE)
+Need to store EE information and decide on what to expose to client facing systems versus internal.
+
+Id
+FirstName
+LastName
+CompanyEmail
+Street
+Unit
+Region
+Postal
+Country
+LastSSN
+DateOfBirth
+Collection Dependents
+
+
+
+Create DB Schema for Spouse Employer information (SPER)
+Identify what we need to store for the spouse's employers
+
+Id
+Name
+Email
+Position
+PlanInformation
+
+
+
+Create DB Schema for communication schedules
+Id
+StartDate
+EndDate
+Recurring
+Frequency
+MessageId
+
+
+
+
+Create DB Schema for Alerts and Warnings
+Clients need configurable alerts and warnings, storing these in a db is advised.
+
+Id
+Type
+Name
+Message
+Severity
+
+
+
+Create DB Schema for audits
+DB schema for capturing audits.
+
+Id
+Date
+Type
+Deadlines
+Active
+
+
+
+
+Create DB Schema for client imports
+Basic Import format to supply to our clients:
+
+(Copy from DataLocal)
+[Reference]
+[ClientEEId]
+[EmployeeSSN]
+[EmployeeFirstName]
+[EmployeeMiddleName]
+[EmployeeLastName]
+[EmployeeSuffix]
+[EmployeeDateOfBirth]
+[EmployeeGender]
+[EmployeeStreetAddress1]
+[EmployeeStreetAddress2]
+[EmployeeCity]
+[EmployeeState]
+[EmployeeZipCode]
+[EmployeeHomePhone]
+[EmployeeWorkPhone]
+[DependentFirstName]
+[DependentLastName]
+[DependentMiddleName]
+[DependentSuffix]
+[DependentGender]
+[DependentSSN]
+[DependentDateOfBirth]
+[DependentRelationToEmployee]
+[ConSovaRelation]
+[VIP]
+[QMSCO]
+[Disabled]
+[MedicalPlan]
+[DentalPlan]
+[VisionPlan]
+[Surcharge]
+[Criteria1]
+[Criteria2]
+[Criteria3]
+[Criteria4]
+[Criteria5]
+[IsExistingEmployee]
+[IsExistingDependent]
+[IsPreviouslyIneligible]
+[HasOpenAudit]
+[LastClientAuditId]
+[LastAuditDate]
+[LastAuditEndDate]
+[DependentId]
+[RelationshipInDEV]
+[IncludeInAudit]
+[EmployeeId]
+[IsBiologicalChild]
+[SubClient]
+[WorkLocation]
+[CoverageType]
+[QualifyingEvent]
+[ClientAuditId]
+[AuditDate]
+[ClientId]
+[EmployeeEmail]
+[EmployeeStatus]
+[IsExistingEmployeeClientEEId]
+[BusinessUnit]
+[DepartmentId]
+[DepartmentName]
+[JobClass]
+[JobCode]
+[JobCodeDescription]
+[PositionDescription]
+[UnionCode]
+[BargainUnit]
+[LocationCode]
+[LocationCodeDescription]
+[OldDependentId]
+[InExclusionList]
+[IsPreviouslyIncompleteForSurcharge]
+[EffectiveDate]
+[ExcludedReason]

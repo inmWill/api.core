@@ -1,0 +1,68 @@
+OCV Framework features (API)
+
+Web API approach for ConSova REST interface
+	Lean and quick with low bandwidth requirements
+	Per client implementation validation
+		Let our clients to use the api directly
+		Allows the use of native apps using the same backend.
+
+Enterprise Standard Tier Architecture
+	Clean separation of concerns
+	Designed with ease of expansion and support at the forefront
+	Full exception handling and logging
+		Database and file system, we'll know when and where something happened
+		Log specific user actions
+		DB autologs changes and tracks IPs
+
+Owin Authentication Wrapper
+	Industry Standard authentication
+	Secure individual routes with different role requirements
+	Hooks for SSO
+	Token based approach for cross browser support and future proofing
+
+Full DI strategy
+	Easily switch out components, add new core components and reduce maintence difficulty
+	Best practice for enterprise software
+	Increased system lifeline and future proofing
+	
+Auto-generated documentation
+	Self documenting code
+	XML comment generation for each application tier
+		
+Smart Data Access
+	Automatic object conversions
+	Built in CRUD operations
+	Simplified viewmodel generation
+	Build a feature without worrying about how you get the data just worry about what you do with it
+	
+TDD Support
+	Hooks for unit and behavior test driven development
+	Easily integrate into build server for continuous feature development
+	
+	
+
+Frontend Framework features (AngularJS)
+
+Proven and stable rich javascript framework
+	Supported and driven by Google
+	Fast and lightweight
+	follows proven software design patterns and methodologies
+
+Modular Feature-Driven Focus
+	Each component is a stand alone system that can be reused
+	Developers can focus on a single task at a time
+
+Html5 compliant
+	Cross browser support and legacy browser support IE 9+, firefox and chrome
+
+Bootstrap grid system
+	Responsive out of the box
+	Fast and proven CSS 
+
+BDD Support
+	Built in support for running unit and behavioral tests
+	End to End testing with support for auto screenshotting issues
+	Write tests with expressive and understandable syntax
+		"AS the User I should see my name when I login"
+		"AS the Admin I should see the count of total responders"
+		
