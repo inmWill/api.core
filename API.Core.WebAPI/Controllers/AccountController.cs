@@ -10,6 +10,7 @@ using API.Core.Domain.Enums;
 using API.Core.Domain.InputModels;
 using API.Core.Domain.Models.UserIdentity;
 using API.Core.Service.Interfaces;
+using API.Core.Domain.ViewModels;
 using Microsoft.AspNet.Identity;
 using NLog;
 
@@ -30,6 +31,32 @@ namespace API.Core.Rest.WebAPI.Controllers
             //   _authRepository = authRepository;
             _authService = authService;
             _clientEmployeeService = clientEmployeeService;
+        }
+
+
+        // GET api/Account/GetCurrentUser
+        public IHttpActionResult GetCurrentUser()
+        {
+            try
+            {
+                var user = new UserAccountViewModel
+                {
+                    UserId = 1,
+                    UserName = "Admin",
+                    FirstName = "Ellen",
+                    LastName = "Ripley",
+                    Email = "eripley@weylandYutani.com",
+                    IsAuthorized = true,
+                    Roles = new string[1] { "Admin" }
+                };
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error retrieving current user account: {0}", ex.Message);
+                return BadRequest();
+            }
         }
 
         // GET api/Account/GetActiveUserAccount

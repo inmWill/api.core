@@ -92,6 +92,7 @@
     <Compile Include="ViewModels\AppUserViewModel.cs" />
     <Compile Include="ViewModels\EmployeeDependentViewModel.cs" />
     <Compile Include="ViewModels\SurveyViewModel.cs" />
+    <Compile Include="ViewModels\UserAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
