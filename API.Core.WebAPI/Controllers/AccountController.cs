@@ -22,6 +22,12 @@ namespace API.Core.Rest.WebAPI.Controllers
         private readonly IClientEmployeeService _clientEmployeeService;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Contains CRUD endpoints for user accounts
+        /// TODO: Use different end points and view models for different access levels (admin, staff, user, etc...)
+        /// </summary>
+        /// <param name="authService"></param>
+        /// <param name="clientEmployeeService"></param>
         public AccountController(IAuthService authService, IClientEmployeeService clientEmployeeService)
         {
             if (authService == null || clientEmployeeService == null)
@@ -43,7 +49,7 @@ namespace API.Core.Rest.WebAPI.Controllers
                 {
                     UserId = 1,
                     UserName = "Admin",
-                    FirstName = "Ellen",
+                    FirstName = "Ellen2",
                     LastName = "Ripley",
                     Email = "eripley@weylandYutani.com",
                     IsAuthorized = true,
