@@ -73,52 +73,15 @@
     <Compile Include="Interfaces\IIdentifier.cs" />
     <Compile Include="Interfaces\IModifiedOn.cs" />
     <Compile Include="Interfaces\IObjectWithState.cs" />
-    <Compile Include="Migrations\201508110415324_Initial.cs" />
-    <Compile Include="Migrations\201508110415324_Initial.Designer.cs">
-      <DependentUpon>201508110415324_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508110436171_ChangedDatetimeColumnBack.cs" />
-    <Compile Include="Migrations\201508110436171_ChangedDatetimeColumnBack.Designer.cs">
-      <DependentUpon>201508110436171_ChangedDatetimeColumnBack.cs</DependentUpon>
+    <Compile Include="Migrations\201510190115343_Initial.cs" />
+    <Compile Include="Migrations\201510190115343_Initial.Designer.cs">
+      <DependentUpon>201510190115343_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Action\SystemAction.cs" />
     <Compile Include="Models\Action\UserAction.cs" />
-    <Compile Include="Models\Lookup\InputOptionType.cs" />
-    <Compile Include="Models\Lookup\OperatorType.cs" />
-    <Compile Include="Models\Lookup\QuestionType.cs" />
-    <Compile Include="Models\Lookup\UnitOfMeasure.cs" />
-    <Compile Include="Models\Communications\Notification.cs" />
-    <Compile Include="Models\Communications\Schedule.cs" />
     <Compile Include="Models\Base\BaseEntity.cs" />
-    <Compile Include="Models\Client\Audit.cs" />
-    <Compile Include="Models\Import\ClientImportRecord.cs" />
-    <Compile Include="Models\Lookup\MessageType.cs" />
-    <Compile Include="Models\Lookup\PlanType.cs" />
-    <Compile Include="Models\Lookup\AuditType.cs" />
-    <Compile Include="Models\Client\Client.cs" />
-    <Compile Include="Models\Client\EmployeeDependent.cs" />
-    <Compile Include="Models\Client\SpouseEmployer.cs" />
-    <Compile Include="Models\Event\ClientEvent.cs" />
-    <Compile Include="Models\Event\DependentEvent.cs" />
-    <Compile Include="Models\Event\EmployeeEvent.cs" />
-    <Compile Include="Models\Lookup\DependentType.cs" />
-    <Compile Include="Models\Lookup\EventType.cs" />
-    <Compile Include="Models\Client\Plan.cs" />
-    <Compile Include="Models\Client\Rule.cs" />
-    <Compile Include="Models\Client\Surcharge.cs" />
-    <Compile Include="Models\Communications\Template.cs" />
-    <Compile Include="Models\Survey\Dialog.cs" />
-    <Compile Include="Models\Survey\Answer.cs" />
-    <Compile Include="Models\Survey\EmployeeQuestionnaire.cs" />
-    <Compile Include="Models\Survey\EmployeeSurveyAudit.cs" />
-    <Compile Include="Models\Survey\InputOption.cs" />
-    <Compile Include="Models\Survey\Question.cs" />
-    <Compile Include="Models\Survey\SurveyQuestionnaire.cs" />
-    <Compile Include="Models\Survey\SkipLogicRule.cs" />
-    <Compile Include="Models\Survey\Survey.cs" />
     <Compile Include="Models\Identity\AuthorizedClient.cs" />
-    <Compile Include="Models\Mapping\AppUserMap.cs" />
     <Compile Include="Models\Identity\AppUser.cs" />
     <Compile Include="DbContexts\APICoreContext.cs" />
     <Compile Include="Models\Identity\RefreshToken.cs" />
@@ -130,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="Models\Client\ClientEmployee.cs" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -154,11 +116,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508110415324_Initial.resx">
-      <DependentUpon>201508110415324_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508110436171_ChangedDatetimeColumnBack.resx">
-      <DependentUpon>201508110436171_ChangedDatetimeColumnBack.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510190115343_Initial.resx">
+      <DependentUpon>201510190115343_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using API.Core.Repository.Interfaces;
-using API.Core.Repository.Models.Client;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace API.Core.Repository.Models.Identity
@@ -12,8 +11,10 @@ namespace API.Core.Repository.Models.Identity
     public class AppUser : IdentityUser, IObjectWithState
     {
         public bool Enabled { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Email { get; set; }
         public IEnumerable<string> UserRoles { get; set; }
-        public ClientEmployee ClientEmployee { get; set; }
         public State State { get; set; }
     }
 }

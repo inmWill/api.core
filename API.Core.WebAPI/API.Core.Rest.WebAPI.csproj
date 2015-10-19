@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -176,20 +177,10 @@
     <Compile Include="Attributes\AuthorizeAttribute.cs" />
     <Compile Include="Attributes\Action\ValidateModelStateAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AnswerController.cs" />
-    <Compile Include="Controllers\DialogController.cs" />
-    <Compile Include="Controllers\EmployeeDependentController.cs" />
-    <Compile Include="Controllers\ClientEmployeeController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\QuestionController.cs" />
-    <Compile Include="Controllers\SkipLogicRuleController.cs" />
-    <Compile Include="Controllers\SurveyController.cs" />
-    <Compile Include="Controllers\SurveyQuestionnaireController.cs" />
     <Compile Include="Providers\ISimpleAuthorizationServerProvider.cs" />
     <Compile Include="Providers\ISimpleRefreshTokenProvider.cs" />
     <Compile Include="Helpers\BaseApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\InmNotifyController.cs" />
     <Compile Include="Controllers\RefreshTokensController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -58,16 +58,6 @@ namespace API.Core.Rest.WebAPI
             
             container.RegisterType<IRepository, EntityRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IAuthService, AuthService>(new HierarchicalLifetimeManager());
-            container.RegisterType<ISurveyService, SurveyService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IClientEmployeeService, ClientEmployeeService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
-            container.RegisterType<ISurveyService, SurveyService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IQuestionService, QuestionService>(new HierarchicalLifetimeManager());
-            container.RegisterType<ISurveyQuestionnaireService, SurveyQuestionnaireService>(new HierarchicalLifetimeManager());
-            container.RegisterType<ISkipLogicRuleService, SkipLogicRuleService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IAnswerService, AnswerService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IEmployeeQuestionnaireService, EmployeeQuestionnaireService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDialogService, DialogService>(new HierarchicalLifetimeManager());
 
 
             return container;

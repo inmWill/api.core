@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Linq.Expressions;
-using API.Core.Repository.Models.Client;
 
 namespace API.Core.Service.RuleEngine
 {
+
+    class Rule
+    {
+        public string MemberName { get; set; }
+        public string Operator { get; set; }
+        public string TargetValue { get; set; }
+    }
+
     class RuleEngine
     {
         public static Func<T, bool> CompileRule<T>(Rule r)

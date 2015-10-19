@@ -19,7 +19,6 @@ namespace API.Core.Rest.WebAPI.Controllers
     public class AccountController : BaseController
     {
         private readonly IAuthService _authService;
-        private readonly IClientEmployeeService _clientEmployeeService;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -28,15 +27,14 @@ namespace API.Core.Rest.WebAPI.Controllers
         /// </summary>
         /// <param name="authService"></param>
         /// <param name="clientEmployeeService"></param>
-        public AccountController(IAuthService authService, IClientEmployeeService clientEmployeeService)
+        public AccountController(IAuthService authService)
         {
-            if (authService == null || clientEmployeeService == null)
+            if (authService == null)
             {
                 throw new ArgumentNullException("dependency");
             }
             //   _authRepository = authRepository;
             _authService = authService;
-            _clientEmployeeService = clientEmployeeService;
         }
 
 
@@ -117,36 +115,8 @@ namespace API.Core.Rest.WebAPI.Controllers
                 if (userAccount == null)
                     return BadRequest();
 
-                userAccount.ClientEmployee.FirstName = record.FirstName;
-                userAccount.ClientEmployee.LastName = record.LastName;
-                userAccount.ClientEmployee.CompanyEmail = record.CompanyEmail;
-                userAccount.ClientEmployee.PreferredEmail = record.PreferredEmail;
-                userAccount.ClientEmployee.Street = record.Street;
-                userAccount.ClientEmployee.Unit = record.Unit;
-                userAccount.ClientEmployee.Region = record.Region;
-                userAccount.ClientEmployee.Postal = record.Postal;
-                userAccount.ClientEmployee.Country = record.Country;
-                userAccount.ClientEmployee.DateOfBirth = record.DateOfBirth;
-                userAccount.ClientEmployee.WorkPhone = record.WorkPhone;
-                userAccount.ClientEmployee.HomePhone = record.HomePhone;
-                userAccount.ClientEmployee.CellPhone = record.CellPhone;
-                userAccount.ClientEmployee.State = State.Modified;
-                userAccount.ClientEmployee.HipaaAuthorizationGiven = record.HipaaAuthorizationGiven;
-                if (userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true) != null)
-                {
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).FirstName = record.SpouseFirstName;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).LastName = record.SpouseLastName;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).DateOfBirth = record.SpouseDateOfBirth;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).CellPhone = record.SpouseCellPhone;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).HomePhone = record.SpouseHomePhone;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).WorkPhone = record.SpouseWorkPhone;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).LastSSN = record.SpouseSSN;
-                    userAccount.ClientEmployee.Dependents.Single(r => r.Spouse == true).State = State.Modified;
-                }
-                var result = _clientEmployeeService.Put(userAccount.ClientEmployee);
-                if (result > 0)
-                    return Ok();
-                return BadRequest();
+                // update the account
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -262,6 +232,6 @@ namespace API.Core.Rest.WebAPI.Controllers
             details.BrowserVersion = userBrowser.Version;
 
             return details;
-        }      
+        }
     }
 }

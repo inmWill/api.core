@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using API.Core.Domain.InputModels;
-using API.Core.Domain.Models.Clients;
 using API.Core.Domain.Models.UserIdentity;
 using API.Core.Repository.Interfaces;
 using API.Core.Repository.Models.Identity;
@@ -28,12 +27,10 @@ namespace API.Core.Service.Services
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IAuthRepository _authRepository;
-        private readonly IClientImportRecordService _clientImportRecordService;
 
-        public AuthService(AuthRepository authRepository, ClientImportRecordService clientImportRecordService)
+        public AuthService(AuthRepository authRepository)
         {
             _authRepository = authRepository;
-            _clientImportRecordService = clientImportRecordService;
         }
 
         public bool RegisterUser(Domain.Models.UserIdentity.AppUser user)
@@ -127,58 +124,10 @@ namespace API.Core.Service.Services
         {
             try
             {
-                var clientEmployeeRecord = _clientImportRecordService.GetClientImportRecordByRegistrationModel(appUserRegistrationModel);
-
-                if (clientEmployeeRecord == null)
-                    return false;
-
-                string eeLastFourSSN = clientEmployeeRecord.EmployeeSSN.Substring(clientEmployeeRecord.EmployeeSSN.Length - Math.Min(4, clientEmployeeRecord.EmployeeSSN.Length));
-                string depLastFourSSN = "";
-
-                if(clientEmployeeRecord.DependentSSN != null && clientEmployeeRecord.DependentSSN.Length >4)
-                    depLastFourSSN = clientEmployeeRecord.DependentSSN.Substring(clientEmployeeRecord.DependentSSN.Length - Math.Min(4, clientEmployeeRecord.DependentSSN.Length));
-
                 var appUserModel = new Domain.Models.UserIdentity.AppUser
                 {
-                    Enabled = true,
-                    ClientEmployee = new AppUserInfo
-                    {
-                        CreatedOn = DateTime.Now,
-                        ModifiedOn = DateTime.Now,
-                        Client_Id = clientEmployeeRecord.ClientId,
-                        ModifiedById = 1,
-                        IpAddress = clientEmployeeRecord.IpAddress,
-                        FirstName = clientEmployeeRecord.EmployeeFirstName,
-                        LastName = clientEmployeeRecord.EmployeeLastName,
-                        CompanyEmail = clientEmployeeRecord.EmployeeEmail,
-                        PreferredEmail = clientEmployeeRecord.EmployeeEmail,
-                        Street = clientEmployeeRecord.EmployeeStreetAddress1,
-                        Unit = clientEmployeeRecord.EmployeeStreetAddress2,
-                        City = clientEmployeeRecord.EmployeeCity,
-                        Region = clientEmployeeRecord.EmployeeState,
-                        Postal = clientEmployeeRecord.EmployeeZipCode,
-                        Country = "USA",
-                        LastSSN = eeLastFourSSN,
-                        HomePhone = clientEmployeeRecord.EmployeeHomePhone,
-                        WorkPhone = clientEmployeeRecord.EmployeeWorkPhone,
-                        DateOfBirth = clientEmployeeRecord.EmployeeDateOfBirth,
-                        Dependents = new List<EmployeeDependent>
-                            {
-                                new EmployeeDependent
-                                {
-                                    CreatedOn = DateTime.Now,
-                                    DateOfBirth = clientEmployeeRecord.DependentDateOfBirth,
-                                    Excluded = false,
-                                    FirstName = clientEmployeeRecord.DependentFirstName,
-                                    LastName = clientEmployeeRecord.DependentLastName,
-                                    IpAddress = clientEmployeeRecord.IpAddress,
-                                    LastSSN = depLastFourSSN,
-                                    ModifiedById = 0,
-                                    ModifiedOn = DateTime.Now,
-                                    Spouse = true
-                                }
-                            }
-                    }
+                    Enabled = true
+                    
                 };
                 var appUser = Mapper.Map<AppUser>(appUserModel);
                 appUser.UserName = appUserRegistrationModel.Username;

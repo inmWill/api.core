@@ -45,7 +45,7 @@ namespace API.Core.Repository.Repositories
 
         public IEnumerable<AppUser> FindAllUsers()
         {
-            var users = _userManager.Users.Include(c => c.ClientEmployee).ToList();
+            var users = _userManager.Users.ToList();
             return users;
         }
 
@@ -61,7 +61,7 @@ namespace API.Core.Repository.Repositories
 
         public AppUser FindUserByUsername(string userName)
         {
-            var user = _dbContext.Users.Include(c => c.ClientEmployee).Include(d => d.ClientEmployee.Dependents).FirstOrDefault(u => u.UserName == userName);
+            var user = _dbContext.Users.FirstOrDefault(u => u.UserName == userName);
 
 
             return user;

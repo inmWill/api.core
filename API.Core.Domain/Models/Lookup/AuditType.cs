@@ -1,8 +1,0 @@
-﻿namespace API.Core.Domain.Models.Lookup
-{
-    public class AuditType
-    {
-        public int Id { get; set; }
-        public string Description { get; set; }
-    }
-}

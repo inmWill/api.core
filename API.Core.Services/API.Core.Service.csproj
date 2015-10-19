@@ -83,34 +83,10 @@
     <Compile Include="Helpers\IBaseServiceApi.cs" />
     <Compile Include="Helpers\UnitType.cs" />
     <Compile Include="RuleEngine\RuleValidation.cs" />
-    <Compile Include="Interfaces\IAnswerService.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
-    <Compile Include="Interfaces\IClientImportRecordService.cs" />
-    <Compile Include="Interfaces\IClientEmployeeService.cs" />
-    <Compile Include="Interfaces\IDialogService.cs" />
-    <Compile Include="Interfaces\IEmployeeDependentService.cs" />
-    <Compile Include="Interfaces\IClientService.cs" />
-    <Compile Include="Interfaces\IEmployeeQuestionnaireService.cs" />
-    <Compile Include="Interfaces\IQuestionService.cs" />
-    <Compile Include="Interfaces\ISkipLogicRuleService.cs" />
-    <Compile Include="Interfaces\ISurveyQuestionnaireService.cs" />
-    <Compile Include="Interfaces\ISurveyService.cs" />
     <Compile Include="RuleEngine\RuleEngine.cs" />
-    <Compile Include="Services\AnswerService.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\IUserNotificationService.cs" />
-    <Compile Include="Services\ClientImportRecordService.cs" />
-    <Compile Include="Services\ClientEmployeeService.cs" />
-    <Compile Include="Services\ClientService.cs" />
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\EmployeeDependentService.cs" />
-    <Compile Include="Services\EmployeeQuestionnaireService.cs" />
-    <Compile Include="Services\QuestionService.cs" />
-    <Compile Include="Services\SkipLogicRuleService.cs" />
-    <Compile Include="Services\SurveyQuestionnaireService.cs" />
-    <Compile Include="Services\SurveyService.cs" />
-    <Compile Include="Services\UserNotificationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">
