@@ -80,7 +80,8 @@ namespace API.Core.Repository.Migrations
                     Email = "admin@api.com",
                     UserName = adminUsername,
                     Firstname = "Admin",
-                    Lastname = "Account"
+                    Lastname = "Account",
+                    Enabled = true
        
                 };
 
@@ -99,7 +100,8 @@ namespace API.Core.Repository.Migrations
                     Email = "staff@api.com",
                     UserName = staffUsername,
                     Firstname = "Staff",
-                    Lastname = "Account"
+                    Lastname = "Account",
+                    Enabled = true
                 };
 
                 var result = userManager.Create(staffUser, staffPassword);
@@ -116,7 +118,8 @@ namespace API.Core.Repository.Migrations
                     Email = "user@api.com",
                     UserName = username,
                     Firstname = "User",
-                    Lastname = "Account"
+                    Lastname = "Account",
+                    Enabled = true
                 };
 
                 var result = userManager.Create(User, password);
