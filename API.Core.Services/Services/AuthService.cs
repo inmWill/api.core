@@ -54,8 +54,8 @@ namespace API.Core.Service.Services
         {
             try
             {
-                var status = ChangeUserStatus(user.UserName, false);
-                var access = _authRepository.RevokeAccess(user.UserName);
+                var status = ChangeUserStatus(user.Username, false);
+                var access = _authRepository.RevokeAccess(user.Username);
                 return status;
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace API.Core.Service.Services
         {
             try
             {
-                return ChangeUserStatus(user.UserName, true);
+                return ChangeUserStatus(user.Username, true);
             }
             catch (Exception ex)
             {
@@ -150,7 +150,7 @@ namespace API.Core.Service.Services
                 if (repoUser != null)
                 {
                     var appUser = Mapper.Map<Domain.Models.UserIdentity.AppUser>(repoUser);
-                    appUser.UserRoles = _authRepository.GetUserRoles(repoUser.Id);
+                    appUser.Roles = _authRepository.GetUserRoles(repoUser.Id);
                     return appUser;
                 }
                 else
@@ -170,7 +170,7 @@ namespace API.Core.Service.Services
             {
                 var repoUser = _authRepository.FindUserByUsername(userName);
                 var appUser = Mapper.Map<Domain.Models.UserIdentity.AppUser>(repoUser);
-                appUser.UserRoles = _authRepository.GetUserRoles(repoUser.Id);
+                appUser.Roles = _authRepository.GetUserRoles(repoUser.Id);
                 return appUser;
             }
             catch (Exception ex)
