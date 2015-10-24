@@ -83,9 +83,9 @@
     <Compile Include="Helpers\IBaseServiceApi.cs" />
     <Compile Include="Helpers\UnitType.cs" />
     <Compile Include="RuleEngine\RuleValidation.cs" />
-    <Compile Include="Interfaces\IAuthService.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="RuleEngine\RuleEngine.cs" />
-    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

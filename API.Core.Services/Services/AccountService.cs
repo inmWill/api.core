@@ -16,19 +16,19 @@ namespace API.Core.Service.Services
 {
 
     ///<summary>
-    ///AuthService registers users and other auth duties
+    ///AccountService registers users and other auth duties
     /// Converts between Domain and Repository models.
     /// TODO: consider refactoring to split off token and auth client duties if those items need to scale or reside on a different server
     ///</summary>
     ///<remarks>
     ///This service uses a custom implementation different from the generic BaseServiceApi since we don't want to expose full crud on user identity accounts.
     ///</remarks>
-    public class AuthService : IAuthService
+    public class AccountService : IAccountService
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IAuthRepository _authRepository;
 
-        public AuthService(AuthRepository authRepository)
+        public AccountService(AuthRepository authRepository)
         {
             _authRepository = authRepository;
         }
@@ -120,7 +120,7 @@ namespace API.Core.Service.Services
             }
         }
 
-        public bool RegisterClientEEUser(AppUserRegistrationModel appUserRegistrationModel)
+        public bool RegisterUserAccount(AppUserRegistrationModel appUserRegistrationModel)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace API.Core.Service.Services
 
         }
 
-        public Domain.Models.UserIdentity.AppUser FindActiveUserProfile(string userName)
+        public Domain.Models.UserIdentity.AppUser FindUser(string userName)
         {
             try
             {
@@ -176,6 +176,22 @@ namespace API.Core.Service.Services
             catch (Exception ex)
             {
                 Logger.Error("Error finding user: " + ex.InnerException);
+                throw;
+            }
+
+        }
+
+        public bool UpdateUser(Domain.Models.UserIdentity.AppUser user)
+        {
+            try
+            {
+                var repoUser = Mapper.Map<Repository.Models.Identity.AppUser>(user);
+                var result = _authRepository.UpdateUser(repoUser);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error updating user: " + ex.InnerException);
                 throw;
             }
 
@@ -235,5 +251,6 @@ namespace API.Core.Service.Services
                 throw;
             }
         }
+
     }
 }

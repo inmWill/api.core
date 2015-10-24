@@ -4,16 +4,17 @@ using API.Core.Domain.Models.UserIdentity;
 
 namespace API.Core.Service.Interfaces
 {
-    public interface IAuthService
+    public interface IAccountService
     {
         bool RegisterUser(AppUser user);
         bool CheckUsernameAvailability(string username);
-        bool RegisterClientEEUser(AppUserRegistrationModel appUserRegistrationModel);
+        bool RegisterUserAccount(AppUserRegistrationModel appUserRegistrationModel);
         bool DisableUser(AppUser user);
         bool EnableUser(AppUser user);
         IEnumerable<AppUser> FindAllUsers();
         AppUser FindUser(string userName, string password);
-        AppUser FindActiveUserProfile(string userName);
+        AppUser FindUser(string userName);
+        bool UpdateUser(AppUser user);
         AuthorizedClient FindAuthorizedClient(string authorizedClientId);
         bool AddRefreshToken(RefreshToken token);
         bool RemoveRefreshToken(string refreshTokenId);

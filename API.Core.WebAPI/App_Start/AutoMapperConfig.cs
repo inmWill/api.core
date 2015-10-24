@@ -1,5 +1,7 @@
 ﻿using API.Core.Domain.Enums;
 using API.Core.Domain.Models.UserIdentity;
+using API.Core.Domain.InputModels;
+using API.Core.Domain.ViewModels;
 using API.Core.Utils.Automapper.AutoMapper;
 
 namespace API.Core.Rest.WebAPI
@@ -19,6 +21,9 @@ namespace API.Core.Rest.WebAPI
 
             AutoMapperConfig.CreateMap<AppUser, API.Core.Repository.Models.Identity.AppUser>();
             AutoMapperConfig.CreateMap<API.Core.Repository.Models.Identity.AppUser, AppUser>();
+
+            AutoMapperConfig.CreateMap<AppUserEditModel, AppUser>();
+            AutoMapperConfig.CreateMap<AppUser, AppUserEditModel>();
            
             AutoMapperConfig.CreateMap<RefreshToken, API.Core.Repository.Models.Identity.RefreshToken>();
             AutoMapperConfig.CreateMap<API.Core.Repository.Models.Identity.RefreshToken, RefreshToken>();

@@ -57,7 +57,7 @@ namespace API.Core.Rest.WebAPI
                 WithLifetime.Hierarchical);
             
             container.RegisterType<IRepository, EntityRepository>(new HierarchicalLifetimeManager());
-            container.RegisterType<IAuthService, AuthService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IAccountService, AccountService>(new HierarchicalLifetimeManager());
 
 
             return container;

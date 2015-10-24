@@ -13,8 +13,8 @@ namespace API.Core.Rest.WebAPI.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider, ISimpleAuthorizationServerProvider
     {
-        //private readonly IAuthService _authService;
-        //public SimpleAuthorizationServerProvider(IAuthService authService)
+        //private readonly IAccountService _authService;
+        //public SimpleAuthorizationServerProvider(IAccountService authService)
         //{
         //    _authService = authService;
         //}

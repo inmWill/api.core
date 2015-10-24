@@ -13,12 +13,13 @@ using API.Core.Service.Interfaces;
 using API.Core.Domain.ViewModels;
 using Microsoft.AspNet.Identity;
 using NLog;
+using AutoMapper;
 
 namespace API.Core.Rest.WebAPI.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly IAuthService _authService;
+        private readonly IAccountService _authService;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace API.Core.Rest.WebAPI.Controllers
         /// </summary>
         /// <param name="authService"></param>
         /// <param name="clientEmployeeService"></param>
-        public AccountController(IAuthService authService)
+        public AccountController(IAccountService authService)
         {
             if (authService == null)
             {
@@ -70,7 +71,7 @@ namespace API.Core.Rest.WebAPI.Controllers
             try
             {
                 var identity = User.Identity;
-                var userAccount = _authService.FindActiveUserProfile(identity.GetUserName());
+                var userAccount = _authService.FindUser(identity.GetUserName());
                 return userAccount;
             }
             catch (Exception ex)
@@ -105,18 +106,24 @@ namespace API.Core.Rest.WebAPI.Controllers
         /// <returns></returns>
         [HttpPut]
         [API.Core.Rest.WebAPI.Attributes.Authorize]
-        public IHttpActionResult UpdateActiveUserProfile([FromBody] AppUserEditModel record)
+        public IHttpActionResult UpdateUserAccount([FromBody] AppUserEditModel record)
         {
             try
             {
                 var identity = User.Identity;
-                var userAccount = _authService.FindActiveUserProfile(identity.GetUserName());
+
+                var userAccount = _authService.FindUser(identity.GetUserName());
 
                 if (userAccount == null)
-                    return BadRequest();
+                    return NotFound();
+
+                userAccount = Mapper.Map<AppUser>(record);
+
+                var result = _authService.UpdateUser(userAccount);
+
 
                 // update the account
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -206,7 +213,7 @@ namespace API.Core.Rest.WebAPI.Controllers
             var userInfo = getActiveUserAgentInfo(Request);
             appUserRegistrationModel.IpAddress = userInfo.IP;
 
-            var result = _authService.RegisterClientEEUser(appUserRegistrationModel);
+            var result = _authService.RegisterUserAccount(appUserRegistrationModel);
 
             if (result)
                 return Ok();
