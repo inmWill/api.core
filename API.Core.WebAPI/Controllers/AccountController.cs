@@ -6,14 +6,13 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
-using API.Core.Domain.Enums;
-using API.Core.Domain.InputModels;
 using API.Core.Domain.Models.UserIdentity;
 using API.Core.Service.Interfaces;
-using API.Core.Domain.ViewModels;
+using API.Core.Domain.Models.EditModels;
+using API.Core.Rest.WebAPI.ViewModels;
 using Microsoft.AspNet.Identity;
 using NLog;
-using AutoMapper;
+
 
 namespace API.Core.Rest.WebAPI.Controllers
 {
@@ -40,44 +39,19 @@ namespace API.Core.Rest.WebAPI.Controllers
 
 
         // GET api/Account/GetCurrentUser
-        public IHttpActionResult GetCurrentUser()
-        {
-            try
-            {
-                var user = new UserAccountViewModel
-                {
-                    UserId = 1,
-                    UserName = "Admin",
-                    FirstName = "Ellen2",
-                    LastName = "Ripley",
-                    Email = "eripley@weylandYutani.com",
-                    IsAuthorized = true,
-                    Roles = new string[1] { "Admin" }
-                };
-
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Error retrieving current user account: {0}", ex.Message);
-                return BadRequest();
-            }
-        }
-
-        // GET api/Account/GetActiveUserAccount
         [API.Core.Rest.WebAPI.Attributes.Authorize]
-        public AppUser GetActiveUserAccount()
+        public IHttpActionResult GetCurrentUser()
         {
             try
             {
                 var identity = User.Identity;
                 var userAccount = _authService.FindUser(identity.GetUserName());
-                return userAccount;
+                return Ok(userAccount);
             }
             catch (Exception ex)
             {
                 Logger.Error("Error retrieving active user account: {0}", ex.Message);
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
@@ -112,23 +86,17 @@ namespace API.Core.Rest.WebAPI.Controllers
             {
                 var identity = User.Identity;
 
-                var userAccount = _authService.FindUser(identity.GetUserName());
+                var result = _authService.UpdateUser(record, identity.GetUserName());
 
-                if (userAccount == null)
-                    return NotFound();
-
-                userAccount = Mapper.Map<AppUser>(record);
-
-                var result = _authService.UpdateUser(userAccount);
-
-
-                // update the account
-                return Ok(result);
+                if (result != null)
+                    return Ok(result);
+                else
+                    return BadRequest();
             }
             catch (Exception ex)
             {
                 Logger.Error("Error updating active user account: {0}", ex.Message);
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
@@ -201,25 +169,25 @@ namespace API.Core.Rest.WebAPI.Controllers
             return BadRequest();
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        public IHttpActionResult RegisterClientEmployee(AppUserRegistrationModel appUserRegistrationModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[AllowAnonymous]
+        //[HttpPost]
+        //public IHttpActionResult RegisterClientEmployee(AppUserRegistrationModel appUserRegistrationModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var userInfo = getActiveUserAgentInfo(Request);
-            appUserRegistrationModel.IpAddress = userInfo.IP;
+        //    var userInfo = getActiveUserAgentInfo(Request);
+        //    appUserRegistrationModel.IpAddress = userInfo.IP;
 
-            var result = _authService.RegisterUserAccount(appUserRegistrationModel);
+        //    var result = _authService.RegisterUserAccount(appUserRegistrationModel);
 
-            if (result)
-                return Ok();
+        //    if (result)
+        //        return Ok();
 
-            return BadRequest();
-        }
+        //    return BadRequest();
+        //}
 
         private UserAgentDetails getActiveUserAgentInfo(HttpRequestMessage request = null)
         {

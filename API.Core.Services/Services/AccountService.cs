@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using API.Core.Domain.InputModels;
-using API.Core.Domain.Models.UserIdentity;
 using API.Core.Repository.Interfaces;
-using API.Core.Repository.Models.Identity;
 using API.Core.Repository.Repositories;
 using API.Core.Service.Interfaces;
 using AutoMapper;
@@ -120,27 +117,27 @@ namespace API.Core.Service.Services
             }
         }
 
-        public bool RegisterUserAccount(AppUserRegistrationModel appUserRegistrationModel)
-        {
-            try
-            {
-                var appUserModel = new Domain.Models.UserIdentity.AppUser
-                {
-                    Enabled = true
+        //public bool RegisterUserAccount(AppUserRegistrationModel appUserRegistrationModel)
+        //{
+        //    try
+        //    {
+        //        var appUserModel = new Domain.Models.UserIdentity.AppUser
+        //        {
+        //            Enabled = true
                     
-                };
-                var appUser = Mapper.Map<AppUser>(appUserModel);
-                appUser.UserName = appUserRegistrationModel.Username;
-                appUser.Email = appUserRegistrationModel.Email;
-                var result = _authRepository.RegisterUser(appUser, appUserRegistrationModel.Password);
-                return result.Succeeded;
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Error registering user: " + ex.InnerException);
-                throw;
-            }
-        }
+        //        };
+        //        var appUser = Mapper.Map<AppUser>(appUserModel);
+        //        appUser.UserName = appUserRegistrationModel.Username;
+        //        appUser.Email = appUserRegistrationModel.Email;
+        //        var result = _authRepository.RegisterUser(appUser, appUserRegistrationModel.Password);
+        //        return result.Succeeded;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.Error("Error registering user: " + ex.InnerException);
+        //        throw;
+        //    }
+        //}
 
         public Domain.Models.UserIdentity.AppUser FindUser(string userName, string password)
         {
@@ -181,13 +178,20 @@ namespace API.Core.Service.Services
 
         }
 
-        public bool UpdateUser(Domain.Models.UserIdentity.AppUser user)
+        public Domain.Models.UserIdentity.AppUser UpdateUser(Domain.Models.EditModels.AppUserEditModel editUser, string userName)
         {
             try
             {
-                var repoUser = Mapper.Map<Repository.Models.Identity.AppUser>(user);
-                var result = _authRepository.UpdateUser(repoUser);
-                return result;
+                var user = _authRepository.FindUserByUsername(userName);
+                user.Firstname = editUser.Firstname;
+                user.Lastname = editUser.Lastname;
+                
+
+                var result = _authRepository.UpdateUser(user);
+                if (result)
+                    return Mapper.Map<Domain.Models.UserIdentity.AppUser>(user);
+                
+                return null;
             }
             catch (Exception ex)
             {

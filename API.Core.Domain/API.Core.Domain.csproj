@@ -46,16 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
-    <Compile Include="InputModels\AppUserEditModel.cs" />
-    <Compile Include="InputModels\AppUserRegistrationModel.cs" />
-    <Compile Include="InputModels\EmployeeResponseModel.cs" />
     <Compile Include="Models\Base\BaseEntity.cs" />
+    <Compile Include="Models\EditModels\AppUserEditModel.cs" />
     <Compile Include="Models\UserIdentity\AuthorizedClient.cs" />
     <Compile Include="Models\UserIdentity\AppUser.cs" />
     <Compile Include="Models\UserIdentity\RefreshToken.cs" />
     <Compile Include="Models\UserIdentity\UserAgentDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\UserAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

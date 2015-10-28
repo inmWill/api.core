@@ -168,7 +168,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionResults\ViewModelActionResults.cs" />
+    <Compile Include="App_Data\ActionResults\ViewModelActionResults.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\Action\CustomExceptionFilterAttribute.cs" />
@@ -177,6 +177,7 @@
     <Compile Include="Attributes\AuthorizeAttribute.cs" />
     <Compile Include="Attributes\Action\ValidateModelStateAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="EditModels\AppUserEditModel.cs" />
     <Compile Include="Providers\ISimpleAuthorizationServerProvider.cs" />
     <Compile Include="Providers\ISimpleRefreshTokenProvider.cs" />
     <Compile Include="Helpers\BaseApiController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
     <Compile Include="Resolver\UnityResolver.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AppUserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

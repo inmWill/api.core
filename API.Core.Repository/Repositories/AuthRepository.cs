@@ -26,7 +26,8 @@ namespace API.Core.Repository.Repositories
             _dbContext = new APICoreContext();
             _dbContext.Configuration.ProxyCreationEnabled = false;
             _dbContext.Configuration.LazyLoadingEnabled = false;
-            _userManager = new UserManager<AppUser>(new UserStore<AppUser>(_dbContext));
+            var store = new UserStore<AppUser>(_dbContext);
+            _userManager = new UserManager<AppUser>(store);
         }
 
         public IdentityResult RegisterUser(AppUser appUser, string password)
@@ -61,7 +62,8 @@ namespace API.Core.Repository.Repositories
 
         public AppUser FindUserByUsername(string userName)
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.UserName == userName);
+           var user = _userManager.FindByName(userName);
+          //  var user = _dbContext.Users.FirstOrDefault(u => u.UserName == userName);
 
 
             return user;
@@ -71,7 +73,6 @@ namespace API.Core.Repository.Repositories
         {
 
             var result = _userManager.Update(user);
-
             return result.Succeeded;
         }
 

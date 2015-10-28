@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace API.Core.Domain.ViewModels
+namespace API.Core.Rest.WebAPI.ViewModels
 {
-    public class UserAccountViewModel
+    public class AppUserViewModel
     {
         public int UserId { get; set; }
         public string UserName { get; set; }

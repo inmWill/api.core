@@ -1,7 +1,7 @@
 ﻿using API.Core.Domain.Enums;
 using API.Core.Domain.Models.UserIdentity;
-using API.Core.Domain.InputModels;
-using API.Core.Domain.ViewModels;
+using API.Core.Rest.WebAPI.EditModels;
+using API.Core.Rest.WebAPI.ViewModels;
 using API.Core.Utils.Automapper.AutoMapper;
 
 namespace API.Core.Rest.WebAPI

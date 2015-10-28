@@ -6,6 +6,7 @@ namespace API.Core.Domain.Models.UserIdentity
     public partial class AppUser : BaseEntity
     {
         public string Username { get; set; }
+        public string Id { get; set; }
         public string Password { get; set; }
         public bool Enabled { get; set; }
         public string Firstname { get; set; }

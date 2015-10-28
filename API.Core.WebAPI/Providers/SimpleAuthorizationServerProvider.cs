@@ -129,7 +129,10 @@ namespace API.Core.Rest.WebAPI.Providers
                         "as:client_id", context.ClientId ?? string.Empty
                     },
                     { 
-                        "userName", context.UserName
+                        "displayName", user.Firstname + ' ' + user.Lastname
+                    },
+                    {
+                        "userName", user.UserName
                     },
                     {
                         "userRoles", string.Join(",",identity.Claims.Where(c=> c.Type == ClaimTypes.Role).Select(c => c.Value).ToArray())
