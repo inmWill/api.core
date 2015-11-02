@@ -7,6 +7,7 @@ using API.Core.Repository.Interfaces;
 using API.Core.Repository.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace API.Core.Repository.Repositories
 {
@@ -32,8 +33,19 @@ namespace API.Core.Repository.Repositories
 
         public IdentityResult RegisterUser(AppUser appUser, string password)
         {
+            appUser.Id = Guid.NewGuid().ToString();
+            appUser.Enabled = true;
             var result = _userManager.Create(appUser, password);
+            _userManager.AddToRole(appUser.Id, "User");
+            return result;
+        }
 
+        public async Task<IdentityResult> RegisterUserAsync(AppUser appUser, string password)
+        {
+            appUser.Id = Guid.NewGuid().ToString();
+            appUser.Enabled = true;
+            var result = await _userManager.CreateAsync(appUser, password);
+            _userManager.AddToRole(appUser.Id, "User");
             return result;
         }
 
@@ -56,16 +68,13 @@ namespace API.Core.Repository.Repositories
 
             if (user == null)
                 return true;
-            
+
             return false;
         }
 
         public AppUser FindUserByUsername(string userName)
         {
-           var user = _userManager.FindByName(userName);
-          //  var user = _dbContext.Users.FirstOrDefault(u => u.UserName == userName);
-
-
+            var user = _userManager.FindByName(userName);
             return user;
         }
 
@@ -79,11 +88,6 @@ namespace API.Core.Repository.Repositories
         public IEnumerable<string> GetUserRoles(string userId)
         {
             return _userManager.GetRoles(userId);
-        }
-
-        public Task<IdentityResult> RegisterUserAsync(AppUser appUserModel)
-        {
-            throw new System.NotImplementedException();
         }
 
         public async Task<AppUser> FindUserAsync(string userName, string password)
@@ -120,7 +124,7 @@ namespace API.Core.Repository.Repositories
                 _dbContext.RefreshTokens.Add(token);
 
                 return _dbContext.SaveChanges() > 0;
-            }           
+            }
             return false;
         }
 

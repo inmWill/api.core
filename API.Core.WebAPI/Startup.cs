@@ -12,6 +12,7 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
 using Owin;
+using API.Core.Rest.WebAPI.Attributes.Action;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace API.Core.Rest.WebAPI
@@ -33,6 +34,7 @@ namespace API.Core.Rest.WebAPI
             var container = RegisterUnityRootContainer();
 
             config.DependencyResolver = new UnityResolver(container);
+            config.Filters.Add(new ValidateModelAttribute());
 
             WebApiConfig.Register(config);
 

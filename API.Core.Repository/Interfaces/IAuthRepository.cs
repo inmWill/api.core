@@ -25,7 +25,7 @@ namespace API.Core.Repository.Interfaces
 
         IEnumerable<string> GetUserRoles(string userId);
         
-        Task<IdentityResult> RegisterUserAsync(AppUser appUserModel);
+        Task<IdentityResult> RegisterUserAsync(AppUser appUser, string password);
         Task<AppUser> FindUserAsync(string userName, string password);
 
         AuthorizedClient FindAuthorizedClient(string authorizedClientId);

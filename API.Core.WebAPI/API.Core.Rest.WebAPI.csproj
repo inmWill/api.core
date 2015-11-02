@@ -171,9 +171,7 @@
     <Compile Include="App_Data\ActionResults\ViewModelActionResults.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Attributes\Action\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Attributes\Action\LogActionFilter.cs" />
-    <Compile Include="Attributes\Action\ValidateModelForNullAttribute.cs" />
     <Compile Include="Attributes\AuthorizeAttribute.cs" />
     <Compile Include="Attributes\Action\ValidateModelStateAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />

@@ -40,7 +40,7 @@ namespace API.Core.Service.Services
             }
             catch (Exception ex)
             {
-                Logger.Error("Error registering user: " + ex.InnerException);
+                Logger.Error("Error registering user: " + ex.Message);
                 throw;
             }
 

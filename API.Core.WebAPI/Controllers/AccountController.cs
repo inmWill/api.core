@@ -12,7 +12,9 @@ using API.Core.Domain.Models.EditModels;
 using API.Core.Rest.WebAPI.ViewModels;
 using Microsoft.AspNet.Identity;
 using NLog;
-
+using API.Core.Rest.WebAPI.EditModels;
+using AutoMapper;
+using API.Core.Rest.WebAPI.Attributes.Action;
 
 namespace API.Core.Rest.WebAPI.Controllers
 {
@@ -140,33 +142,42 @@ namespace API.Core.Rest.WebAPI.Controllers
             }
         }
 
-        // POST api/Account/RegisterWithService
+        // POST api/Account/Register
         [AllowAnonymous]
-        public IHttpActionResult Register(AppUser appUserModel)
+        [ValidateModel]
+        public IHttpActionResult Register(AppUserRegModel appUserRegModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                var appUser = Mapper.Map<AppUser>(appUserRegModel);
+                var result = _authService.RegisterUser(appUser);
+
+                if (result)
+                    return Ok(result);
+
+                return BadRequest();
             }
-
-            var result = _authService.RegisterUser(appUserModel);
-
-            if (result)
-                return Ok();
-
-            return BadRequest();
+            catch (Exception ex)
+            {
+                Logger.Error("Error registering user account: {0}", ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public IHttpActionResult CheckUsernameAvailability(string username)
+        public IHttpActionResult UsernameAvailable(string username)
         {
+            try
+            {
             var result = _authService.CheckUsernameAvailability(username);
-
-            if (result)
-                return Ok();
-
-            return BadRequest();
+            return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error checking username: {0}", ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         //[AllowAnonymous]

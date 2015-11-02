@@ -22,8 +22,8 @@ namespace API.Core.Rest.WebAPI
             AutoMapperConfig.CreateMap<AppUser, API.Core.Repository.Models.Identity.AppUser>();
             AutoMapperConfig.CreateMap<API.Core.Repository.Models.Identity.AppUser, AppUser>();
 
-            AutoMapperConfig.CreateMap<AppUserEditModel, AppUser>();
-            AutoMapperConfig.CreateMap<AppUser, AppUserEditModel>();
+            AutoMapperConfig.CreateMap<AppUserRegModel, AppUser>();
+            AutoMapperConfig.CreateMap<AppUser, AppUserRegModel>();
            
             AutoMapperConfig.CreateMap<RefreshToken, API.Core.Repository.Models.Identity.RefreshToken>();
             AutoMapperConfig.CreateMap<API.Core.Repository.Models.Identity.RefreshToken, RefreshToken>();
