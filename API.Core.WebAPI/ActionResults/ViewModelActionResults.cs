@@ -15,7 +15,7 @@ namespace API.Core.Rest.WebAPI.ActionResults
 
     public class ViewModelActionResult : IHttpActionResult
     {
-        public Type DestinationType { get; private set; }
+        public Type DestinationType { get; }
         readonly object[] _domainSources;
         private readonly HttpRequestMessage _request;
 

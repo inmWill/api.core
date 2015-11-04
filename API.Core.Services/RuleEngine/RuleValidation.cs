@@ -14,19 +14,19 @@ namespace API.Core.Service.RuleEngine
         /// <summary>
         /// Dictionary that holds mapping between .NET Expression operator type and survey operator types.
         /// </summary>
-        public Dictionary<OperatorType, ExpressionType> exprMap = new Dictionary<OperatorType, ExpressionType>();        
+        public Dictionary<OperatorType, ExpressionType> ExprMap = new Dictionary<OperatorType, ExpressionType>();        
 
         /// <summary>
         /// 
         /// </summary>
         public RuleValidation()
         {
-            exprMap.Add(OperatorType.EqualsTo, ExpressionType.Equal);
-            exprMap.Add(OperatorType.NotEqualsTo, ExpressionType.NotEqual);
-            exprMap.Add(OperatorType.GreaterThan, ExpressionType.GreaterThan);
-            exprMap.Add(OperatorType.GreaterThanEqualsTo, ExpressionType.GreaterThanOrEqual);
-            exprMap.Add(OperatorType.LessThan, ExpressionType.LessThan);
-            exprMap.Add(OperatorType.LessThanEqualsTo, ExpressionType.LessThanOrEqual);
+            ExprMap.Add(OperatorType.EqualsTo, ExpressionType.Equal);
+            ExprMap.Add(OperatorType.NotEqualsTo, ExpressionType.NotEqual);
+            ExprMap.Add(OperatorType.GreaterThan, ExpressionType.GreaterThan);
+            ExprMap.Add(OperatorType.GreaterThanEqualsTo, ExpressionType.GreaterThanOrEqual);
+            ExprMap.Add(OperatorType.LessThan, ExpressionType.LessThan);
+            ExprMap.Add(OperatorType.LessThanEqualsTo, ExpressionType.LessThanOrEqual);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace API.Core.Service.RuleEngine
                 return true; 
             
             //if no matching operator found in the dictonary return false
-            if (!exprMap.ContainsKey(oType))
+            if (!ExprMap.ContainsKey(oType))
                 return false;
             
             //Build binary expression and compile
@@ -75,7 +75,7 @@ namespace API.Core.Service.RuleEngine
             ConstantExpression cRight = Expression.Constant(valueObj, typeof(TType));
 
             //Expression type maps enum values with expression type values using dictionary
-            ExpressionType exprType = exprMap[oType];
+            ExpressionType exprType = ExprMap[oType];
 
             //build binary expression
             BinaryExpression binaryExpr = Expression.MakeBinary(exprType, cLeft, cRight);

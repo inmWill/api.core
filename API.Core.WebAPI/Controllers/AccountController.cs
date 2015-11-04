@@ -151,11 +151,7 @@ namespace API.Core.Rest.WebAPI.Controllers
             {
                 var appUser = Mapper.Map<AppUser>(appUserRegModel);
                 var result = _authService.RegisterUser(appUser);
-
-                if (result)
-                    return Ok(result);
-
-                return BadRequest();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -164,14 +160,22 @@ namespace API.Core.Rest.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Checks the provided string against the identity user store.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>
+        /// True: username is available
+        /// False: username is unavailable
+        /// </returns>
         [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult UsernameAvailable(string username)
         {
             try
             {
-            var result = _authService.CheckUsernameAvailability(username);
-            return Ok(result);
+                var result = _authService.CheckUsernameAvailability(username);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -180,37 +184,26 @@ namespace API.Core.Rest.WebAPI.Controllers
             }
         }
 
-        //[AllowAnonymous]
-        //[HttpPost]
-        //public IHttpActionResult RegisterClientEmployee(AppUserRegistrationModel appUserRegistrationModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
 
-        //    var userInfo = getActiveUserAgentInfo(Request);
-        //    appUserRegistrationModel.IpAddress = userInfo.IP;
-
-        //    var result = _authService.RegisterUserAccount(appUserRegistrationModel);
-
-        //    if (result)
-        //        return Ok();
-
-        //    return BadRequest();
-        //}
-
-        private UserAgentDetails getActiveUserAgentInfo(HttpRequestMessage request = null)
+        private UserAgentDetails GetActiveUserAgentInfo(HttpRequestMessage request = null)
         {
             if (request == null)
                 return null;
 
-            UserAgentDetails details = new UserAgentDetails();
+            var details = new UserAgentDetails
+            {
+                IP = HttpContext.Current.Request.UserHostAddress,
+                Hostname = HttpContext.Current.Request.UserHostName
+            };
 
-            details.IP = HttpContext.Current.Request.UserHostAddress;
-            details.Hostname = HttpContext.Current.Request.UserHostName;
             var userAgent = HttpContext.Current.Request.UserAgent;
-            var userBrowser = new HttpBrowserCapabilities { Capabilities = new Hashtable { { string.Empty, userAgent } } };
+            var userBrowser = new HttpBrowserCapabilities
+            {
+                Capabilities = new Hashtable
+                {
+                    { string.Empty, userAgent }
+                }
+            };
             var factory = new BrowserCapabilitiesFactory();
             factory.ConfigureBrowserCapabilities(new NameValueCollection(), userBrowser);
 

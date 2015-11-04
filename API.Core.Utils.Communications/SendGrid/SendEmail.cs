@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Configuration;
-using API.Core.Utils.Communications.Interfaces;
+using ConSova.Utils.Communications.Interfaces;
 using SendGrid;
 
 namespace ConSova.Utils.Communications.SendGrid

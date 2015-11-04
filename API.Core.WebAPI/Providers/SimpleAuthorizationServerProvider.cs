@@ -40,8 +40,8 @@ namespace API.Core.Rest.WebAPI.Providers
                 return Task.FromResult<object>(null);
             }
 
-            using (AuthRepository _repo = new AuthRepository())
-                authorizedClient = _repo.FindAuthorizedClient(context.ClientId);
+            using (AuthRepository repo = new AuthRepository())
+                authorizedClient = repo.FindAuthorizedClient(context.ClientId);
 
             if (authorizedClient == null)
             {
@@ -91,9 +91,9 @@ namespace API.Core.Rest.WebAPI.Providers
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             AppUser user = new AppUser();
 
-            using (AuthRepository _repo = new AuthRepository())
+            using (AuthRepository repo = new AuthRepository())
             {
-                user = _repo.FindUser(context.UserName, context.Password);
+                user = repo.FindUser(context.UserName, context.Password);
 
                 if (user == null)
                 {
@@ -101,7 +101,7 @@ namespace API.Core.Rest.WebAPI.Providers
                     return;
                 }
 
-                user.UserRoles = _repo.GetUserRoles(user.Id);
+                user.UserRoles = repo.GetUserRoles(user.Id);
 
 
                 if (user.Enabled == false)

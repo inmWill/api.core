@@ -25,12 +25,12 @@ namespace API.Core.Rest.WebAPI.Attributes.Action
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var not_null_parameter_names = GetNotNullParameterNames(actionContext);
-            foreach (var not_null_parameter_name in not_null_parameter_names)
+            var notNullParameterNames = GetNotNullParameterNames(actionContext);
+            foreach (var notNullParameterName in notNullParameterNames)
             {
                 object value;
-                if (!actionContext.ActionArguments.TryGetValue(not_null_parameter_name, out value) || value == null)
-                    actionContext.ModelState.AddModelError(not_null_parameter_name, "Parameter \"" + not_null_parameter_name + "\" was not specified.");
+                if (!actionContext.ActionArguments.TryGetValue(notNullParameterName, out value) || value == null)
+                    actionContext.ModelState.AddModelError(notNullParameterName, "Parameter \"" + notNullParameterName + "\" was not specified.");
             }
 
 

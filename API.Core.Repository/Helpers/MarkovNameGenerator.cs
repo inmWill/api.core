@@ -106,12 +106,12 @@ namespace API.Core.Repository.Helpers
         }
 
         //private members
-        private Dictionary<string, List<char>> _chains = new Dictionary<string, List<char>>();
-        private List<string> _samples = new List<string>();
-        private List<string> _used = new List<string>();
-        private Random _rnd = new Random();
-        private int _order;
-        private int _minLength;
+        private readonly Dictionary<string, List<char>> _chains = new Dictionary<string, List<char>>();
+        private readonly List<string> _samples = new List<string>();
+        private readonly List<string> _used = new List<string>();
+        private readonly Random _rnd = new Random();
+        private readonly int _order;
+        private readonly int _minLength;
 
         //Get a random letter from the chain
         private char GetLetter(string token)

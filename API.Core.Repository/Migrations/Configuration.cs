@@ -110,10 +110,10 @@ namespace API.Core.Repository.Migrations
             const string username = "User";
             const string password = "q23esaw";
 
-            var User = userManager.FindByName(username);
-            if (User == null)
+            var user = userManager.FindByName(username);
+            if (user == null)
             {
-                User = new AppUser
+                user = new AppUser
                 {
                     Email = "user@api.com",
                     UserName = username,
@@ -122,7 +122,7 @@ namespace API.Core.Repository.Migrations
                     Enabled = true
                 };
 
-                var result = userManager.Create(User, password);
+                var result = userManager.Create(user, password);
             }
 
             #endregion
@@ -140,10 +140,10 @@ namespace API.Core.Repository.Migrations
                 userManager.AddToRole(staffUser.Id, clientAdminRole.Name);
             }
 
-            var rolesForClientEmployee = userManager.GetRoles(User.Id);
+            var rolesForClientEmployee = userManager.GetRoles(user.Id);
             if (!rolesForClientEmployee.Contains(clientEmployeeRole.Name))
             {
-                userManager.AddToRole(User.Id, clientEmployeeRole.Name);
+                userManager.AddToRole(user.Id, clientEmployeeRole.Name);
             }
 
         }

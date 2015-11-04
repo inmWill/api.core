@@ -19,7 +19,7 @@ namespace API.Core.Service.Helpers
         where T : class, IIdentifier
         where TDest : class
     {
-        protected readonly IRepository _dataRepository;
+        protected readonly IRepository DataRepository;
         protected string[] Includes { get; set; }
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -29,14 +29,14 @@ namespace API.Core.Service.Helpers
             {
                 throw new ArgumentNullException("dataRepository");
             }
-            _dataRepository = dataRepository;
+            DataRepository = dataRepository;
         }
 
         public virtual IEnumerable<TDest> Get()
         {
             try
             {
-                var entities = _dataRepository.All<T>(Includes);
+                var entities = DataRepository.All<T>(Includes);
                 return Mapper.Map<IEnumerable<TDest>>(entities);
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace API.Core.Service.Helpers
         {
             try
             {
-                var entity = _dataRepository.Find<T>(t => t.Id == id, Includes);
+                var entity = DataRepository.Find<T>(t => t.Id == id, Includes);
                 return Mapper.Map<TDest>(entity);
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace API.Core.Service.Helpers
             try
             {
                 var postValue = Mapper.Map<T>(value);
-                var entity = _dataRepository.Create<T>(postValue);
+                var entity = DataRepository.Create<T>(postValue);
                 return Mapper.Map<TDest>(entity);
             }
             catch (Exception ex)
@@ -81,7 +81,7 @@ namespace API.Core.Service.Helpers
             try
             {
                 var putValue = Mapper.Map<T>(value);
-                return _dataRepository.Update<T>(putValue);
+                return DataRepository.Update<T>(putValue);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace API.Core.Service.Helpers
         {
             try
             {
-                _dataRepository.Delete<T>(t => t.Id == id);
+                DataRepository.Delete<T>(t => t.Id == id);
             }
             catch (Exception ex)
             {
@@ -121,7 +121,7 @@ namespace API.Core.Service.Helpers
         {
             try
             {
-                var entities = _dataRepository.Filter<T>(predicate, Includes);
+                var entities = DataRepository.Filter<T>(predicate, Includes);
                 return Mapper.Map<IEnumerable<TDest>>(entities);
             }
             catch (Exception ex)

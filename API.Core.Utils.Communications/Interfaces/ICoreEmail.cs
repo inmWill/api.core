@@ -1,4 +1,4 @@
-namespace API.Core.Utils.Communications.Interfaces
+namespace ConSova.Utils.Communications.Interfaces
 {
     public interface ICoreEmail
     {

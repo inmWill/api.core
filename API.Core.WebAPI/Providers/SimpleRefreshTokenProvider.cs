@@ -46,9 +46,9 @@ namespace API.Core.Rest.WebAPI.Providers
                 token.ProtectedTicket = context.SerializeTicket();
 
                 bool result;
-                using (AuthRepository _authService = new AuthRepository())
+                using (AuthRepository authService = new AuthRepository())
                 {
-                    result = _authService.AddRefreshToken(token);
+                    result = authService.AddRefreshToken(token);
                 }
 
 
@@ -77,16 +77,16 @@ namespace API.Core.Rest.WebAPI.Providers
                 var hashedTokenId = HashHelper.GetHash(context.Token);
 
 
-                using (AuthRepository _authService = new AuthRepository())
+                using (AuthRepository authService = new AuthRepository())
                 {
-                    var refreshToken = _authService.FindRefreshToken(hashedTokenId);                   
+                    var refreshToken = authService.FindRefreshToken(hashedTokenId);                   
 
                     if (refreshToken != null)
                     {
                         //Get protectedTicket from refreshToken class
                         context.DeserializeTicket(refreshToken.ProtectedTicket);
                         //remove token from db 
-                        var result = _authService.RemoveRefreshToken(hashedTokenId);
+                        var result = authService.RemoveRefreshToken(hashedTokenId);
                     }
                 }
 

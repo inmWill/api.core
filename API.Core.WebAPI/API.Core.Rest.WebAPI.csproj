@@ -168,7 +168,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Data\ActionResults\ViewModelActionResults.cs" />
+    <Compile Include="ActionResults\ViewModelActionResults.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\Action\LogActionFilter.cs" />

@@ -169,8 +169,7 @@ namespace API.Core.Repository.Repositories
 
         public void Dispose()
         {
-            if (_dbContext != null)
-                _dbContext.Dispose();
+            _dbContext?.Dispose();
         }
     }
 }
