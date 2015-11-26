@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using API.Core.Domain.Models.EditModels;
 using API.Core.Domain.Models.UserIdentity;
+using Microsoft.AspNet.Identity;
 
 namespace API.Core.Service.Interfaces
 {
     public interface IAccountService
     {
-        bool RegisterUser(AppUser user);
+        IdentityResult RegisterUser(AppUser user);
         bool CheckUsernameAvailability(string username);
         bool DisableUser(AppUser user);
         bool EnableUser(AppUser user);

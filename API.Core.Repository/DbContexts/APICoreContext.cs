@@ -9,15 +9,18 @@ namespace API.Core.Repository.DbContexts
     public partial class APICoreContext : IdentityDbContext<AppUser>
     {
 
-        static APICoreContext()
+        //static APICoreContext()
+        //{
+
+            
+        //}
+
+        public APICoreContext() 
+            : base("Name=APICoreContext")
         {
             Database.SetInitializer<APICoreContext>(null);
-            
-        }
-        public APICoreContext()
-            : base("Name=APICoreContext")
-
-        {
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
             ((IObjectContextAdapter)this).ObjectContext
             .ObjectMaterialized += (sender, args) =>
             {
@@ -29,7 +32,10 @@ namespace API.Core.Repository.DbContexts
             };
         }
         
-
+        public static APICoreContext Create()
+        {
+            return new APICoreContext();
+        }
 
         // Authentication
         public DbSet<AuthorizedClient> AuthorizedClients { get; set; }

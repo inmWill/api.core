@@ -13,7 +13,7 @@ namespace API.Core.Repository.Models.Identity
         public bool Enabled { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Email { get; set; }
+        public string SecondaryEmail { get; set; }
         public IEnumerable<string> UserRoles { get; set; }
         public State State { get; set; }
     }

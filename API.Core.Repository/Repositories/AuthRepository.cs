@@ -25,10 +25,30 @@ namespace API.Core.Repository.Repositories
         public AuthRepository()
         {
             _dbContext = new APICoreContext();
-            _dbContext.Configuration.ProxyCreationEnabled = false;
-            _dbContext.Configuration.LazyLoadingEnabled = false;
+            //_dbContext.Configuration.ProxyCreationEnabled = false;
+            //_dbContext.Configuration.LazyLoadingEnabled = false;
             var store = new UserStore<AppUser>(_dbContext);
             _userManager = new UserManager<AppUser>(store);
+            _userManager.UserValidator = new UserValidator<AppUser>(_userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
+
+            // Configure validation logic for passwords 
+            _userManager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
+
+            // Configure user lockout defaults 
+            _userManager.UserLockoutEnabledByDefault = true;
+            _userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            _userManager.MaxFailedAccessAttemptsBeforeLockout = 5;
         }
 
         public IdentityResult RegisterUser(AppUser appUser, string password)
@@ -36,7 +56,8 @@ namespace API.Core.Repository.Repositories
             appUser.Id = Guid.NewGuid().ToString();
             appUser.Enabled = true;
             var result = _userManager.Create(appUser, password);
-            _userManager.AddToRole(appUser.Id, "User");
+            if(result.Succeeded)
+                _userManager.AddToRole(appUser.Id, "User");
             return result;
         }
 

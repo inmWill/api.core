@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
@@ -41,6 +42,12 @@ namespace API.Core.Rest.WebAPI.Controllers
 
 
         // GET api/Account/GetCurrentUser
+        /// <summary>
+        /// Gets the current authorized users account from the identity user store.
+        /// </summary>
+        /// <returns>
+        /// AppUser 
+        /// </returns>
         [API.Core.Rest.WebAPI.Attributes.Authorize]
         public IHttpActionResult GetCurrentUser()
         {
@@ -151,7 +158,15 @@ namespace API.Core.Rest.WebAPI.Controllers
             {
                 var appUser = Mapper.Map<AppUser>(appUserRegModel);
                 var result = _authService.RegisterUser(appUser);
-                return Ok(result);
+
+                if(result.Succeeded)
+                    return Ok(result);
+                else
+                {
+                    var errors = result.Errors.Aggregate(" ", (current, error) => current + error);
+                    return BadRequest(errors);
+                }
+              
             }
             catch (Exception ex)
             {

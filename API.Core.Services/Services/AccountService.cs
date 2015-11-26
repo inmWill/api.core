@@ -4,6 +4,7 @@ using API.Core.Repository.Interfaces;
 using API.Core.Repository.Repositories;
 using API.Core.Service.Interfaces;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using NLog;
 using AppUser = API.Core.Repository.Models.Identity.AppUser;
 using AuthorizedClient = API.Core.Domain.Models.UserIdentity.AuthorizedClient;
@@ -30,13 +31,13 @@ namespace API.Core.Service.Services
             _authRepository = authRepository;
         }
 
-        public bool RegisterUser(Domain.Models.UserIdentity.AppUser user)
+        public IdentityResult RegisterUser(Domain.Models.UserIdentity.AppUser user)
         {
             try
             {
                 var appUser = Mapper.Map<AppUser>(user);
                 var result = _authRepository.RegisterUser(appUser, user.Password);
-                return result.Succeeded;
+                return result;
             }
             catch (Exception ex)
             {

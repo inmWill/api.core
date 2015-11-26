@@ -39,11 +39,10 @@ namespace API.Core.Rest.WebAPI
             WebApiConfig.Register(config);
 
             ConfigureOAuth(app);
-
+         //   ConfigureAuth(app);
 
             app.UseWebApi(config);
             AutoMapperWebConfiguration.Configure();            
-
 
 
         }
