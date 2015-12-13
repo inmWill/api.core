@@ -13,12 +13,18 @@ namespace API.Core.Rest.WebAPI.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider, ISimpleAuthorizationServerProvider
     {
-        //private readonly IAccountService _authService;
-        //public SimpleAuthorizationServerProvider(IAccountService authService)
-        //{
-        //    _authService = authService;
-        //}
-
+        /// <summary>
+        /// Called to validate that the origin of the request is a registered "client_id", and that the correct credentials for that client are
+        ///             present on the request. If the web application accepts Basic authentication credentials, 
+        ///             context.TryGetBasicCredentials(out clientId, out clientSecret) may be called to acquire those values if present in the request header. If the web 
+        ///             application accepts "client_id" and "client_secret" as form encoded POST parameters, 
+        ///             context.TryGetFormCredentials(out clientId, out clientSecret) may be called to acquire those values if present in the request body.
+        ///             If context.Validated is not called the request will not proceed further. 
+        /// </summary>
+        /// <param name="context">The context of the event carries information in and results out.</param>
+        /// <returns>
+        /// Task to enable asynchronous execution
+        /// </returns>
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
 
@@ -33,14 +39,11 @@ namespace API.Core.Rest.WebAPI.Providers
 
             if (context.ClientId == null)
             {
-                //Force ignore authorized client requirement.
-                //switch comments to let any client in.
-                //context.Validated();
                 context.SetError("invalid_clientId", "ClientId should be sent.");
                 return Task.FromResult<object>(null);
             }
 
-            using (AuthRepository repo = new AuthRepository())
+            using (var repo = new AuthRepository())
                 authorizedClient = repo.FindAuthorizedClient(context.ClientId);
 
             if (authorizedClient == null)
@@ -49,7 +52,6 @@ namespace API.Core.Rest.WebAPI.Providers
                 return Task.FromResult<object>(null);
             }
 
-            // force confidential clients does not apply to client facing systems
             if (authorizedClient.ApplicationType == ApplicationTypes.NativeConfidential)
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
@@ -80,14 +82,22 @@ namespace API.Core.Rest.WebAPI.Providers
             return Task.FromResult<object>(null);
         }
 
+        /// <summary>
+        /// Called when a request to the Token endpoint arrives with a "grant_type" of "password". This occurs when the user has provided name and password
+        ///             credentials directly into the client application's user interface, and the client application is using those to acquire an "access_token" and 
+        ///             optional "refresh_token". If the web application supports the
+        ///             resource owner credentials grant type it must validate the context.Username and context.Password as appropriate. To issue an
+        ///             access token the context.Validated must be called with a new ticket containing the claims about the resource owner which should be associated
+        ///             with the access token. The application should take appropriate measures to ensure that the endpoint isn’t abused by malicious callers.
+        ///             The default behavior is to reject this grant type.
+        ///             See also http://tools.ietf.org/html/rfc6749#section-4.3.2
+        /// </summary>
+        /// <param name="context">The context of the event carries information in and results out.</param>
+        /// <returns>
+        /// Task to enable asynchronous execution
+        /// </returns>
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-
-            //var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "*";
-
-            // context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
-
-            //    AppUser user = _authService.FindUser(context.UserName, context.Password);
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             AppUser user = new AppUser();
 
@@ -144,6 +154,15 @@ namespace API.Core.Rest.WebAPI.Providers
 
         }
 
+        /// <summary>
+        /// Called at the final stage of a successful Token endpoint request. An application may implement this call in order to do any final 
+        ///             modification of the claims being used to issue access or refresh tokens. This call may also be used in order to add additional 
+        ///             response parameters to the Token endpoint's json response body.
+        /// </summary>
+        /// <param name="context">The context of the event carries information in and results out.</param>
+        /// <returns>
+        /// Task to enable asynchronous execution
+        /// </returns>
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
             foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
@@ -154,6 +173,21 @@ namespace API.Core.Rest.WebAPI.Providers
             return Task.FromResult<object>(null);
         }
 
+        /// <summary>
+        /// Called when a request to the Token endpoint arrives with a "grant_type" of "refresh_token". This occurs if your application has issued a "refresh_token" 
+        ///             along with the "access_token", and the client is attempting to use the "refresh_token" to acquire a new "access_token", and possibly a new "refresh_token".
+        ///             To issue a refresh token the an Options.RefreshTokenProvider must be assigned to create the value which is returned. The claims and properties 
+        ///             associated with the refresh token are present in the context.Ticket. The application must call context.Validated to instruct the 
+        ///             Authorization Server middleware to issue an access token based on those claims and properties. The call to context.Validated may 
+        ///             be given a different AuthenticationTicket or ClaimsIdentity in order to control which information flows from the refresh token to 
+        ///             the access token. The default behavior when using the OAuthAuthorizationServerProvider is to flow information from the refresh token to 
+        ///             the access token unmodified.
+        ///             See also http://tools.ietf.org/html/rfc6749#section-6
+        /// </summary>
+        /// <param name="context">The context of the event carries information in and results out.</param>
+        /// <returns>
+        /// Task to enable asynchronous execution
+        /// </returns>
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
         {
             var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];

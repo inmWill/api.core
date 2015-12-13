@@ -3,6 +3,7 @@ using System.Web.Http;
 using API.Core.Repository.Interfaces;
 using API.Core.Repository.Repositories;
 using API.Core.Rest.WebAPI;
+using API.Core.Rest.WebAPI.Attributes;
 using API.Core.Rest.WebAPI.Providers;
 using API.Core.Rest.WebAPI.Resolver;
 using API.Core.Service.Interfaces;
@@ -35,6 +36,7 @@ namespace API.Core.Rest.WebAPI
 
             config.DependencyResolver = new UnityResolver(container);
             config.Filters.Add(new ValidateModelAttribute());
+            config.Filters.Add(new NoCacheHeaderFilter());
 
             WebApiConfig.Register(config);
 
