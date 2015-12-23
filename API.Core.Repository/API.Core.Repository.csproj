@@ -89,6 +89,7 @@
     <Compile Include="Models\Identity\AppUser.cs" />
     <Compile Include="DbContexts\APICoreContext.cs" />
     <Compile Include="Models\Identity\RefreshToken.cs" />
+    <Compile Include="Models\Widget\Widget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AuthRepository.cs" />
     <Compile Include="Interfaces\IAuthRepository.cs" />
