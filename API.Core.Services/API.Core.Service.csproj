@@ -82,11 +82,13 @@
     <Compile Include="Helpers\ExpressionUtils.cs" />
     <Compile Include="Helpers\IBaseServiceApi.cs" />
     <Compile Include="Helpers\UnitType.cs" />
+    <Compile Include="Interfaces\IWidgetService.cs" />
     <Compile Include="RuleEngine\RuleValidation.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="RuleEngine\RuleEngine.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\WidgetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

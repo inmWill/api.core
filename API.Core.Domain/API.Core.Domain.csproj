@@ -52,6 +52,7 @@
     <Compile Include="Models\UserIdentity\AppUser.cs" />
     <Compile Include="Models\UserIdentity\RefreshToken.cs" />
     <Compile Include="Models\UserIdentity\UserAgentDetails.cs" />
+    <Compile Include="Models\Widget\Widget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

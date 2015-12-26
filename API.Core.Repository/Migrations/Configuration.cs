@@ -8,7 +8,9 @@ namespace API.Core.Repository.Migrations
     using System.Linq;
     using API.Core.Domain.Enums;
     using API.Core.Repository.Models.Identity;
+    using API.Core.Repository.Models.Widget;
     using Utils.Cryptography;
+    using DbContexts;
 
     internal sealed class Configuration : DbMigrationsConfiguration<API.Core.Repository.DbContexts.APICoreContext>
     {
@@ -21,6 +23,23 @@ namespace API.Core.Repository.Migrations
         {
             SeedUsers(context);
             SeedAuthorizedClients(context);
+            SeedWidgets(context);
+        }
+
+        private void SeedWidgets(APICoreContext context)
+        {
+            context.Widgets.AddOrUpdate(
+                 a => a.Id,
+                new Widget
+                {
+                    Name = "My First Widget",
+                    Description = "A test widget",
+                    CreatedOn = DateTime.Now,
+                    IpAddress = "192.0.0.1",
+                    ModifiedById = 1,
+                    ModifiedOn = DateTime.Now
+                }
+                );
         }
 
         private void SeedUsers(API.Core.Repository.DbContexts.APICoreContext context)

@@ -2,6 +2,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using API.Core.Repository.Interfaces;
 using API.Core.Repository.Models.Identity;
+using API.Core.Repository.Models.Widget;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace API.Core.Repository.DbContexts
@@ -40,8 +41,7 @@ namespace API.Core.Repository.DbContexts
         // Authentication
         public DbSet<AuthorizedClient> AuthorizedClients { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-
-
+        public DbSet<Widget> Widgets { get; set; }
 
 
 

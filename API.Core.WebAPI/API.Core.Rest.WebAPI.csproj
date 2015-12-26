@@ -178,6 +178,7 @@
     <Compile Include="Attributes\Action\ValidateModelStateAttribute.cs" />
     <Compile Include="Attributes\NoCacheHeaderFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="EditModels\AppUserEditModel.cs" />
     <Compile Include="Providers\ISimpleAuthorizationServerProvider.cs" />
     <Compile Include="Providers\ISimpleRefreshTokenProvider.cs" />

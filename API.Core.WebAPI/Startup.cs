@@ -61,7 +61,7 @@ namespace API.Core.Rest.WebAPI
             
             container.RegisterType<IRepository, EntityRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IAccountService, AccountService>(new HierarchicalLifetimeManager());
-
+            container.RegisterType<IWidgetService, WidgetService>(new HierarchicalLifetimeManager());
 
             return container;
         }

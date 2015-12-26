@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201511261710307_FixedAppUserEmail.Designer.cs">
       <DependentUpon>201511261710307_FixedAppUserEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512261635268_WidgetFeature.cs" />
+    <Compile Include="Migrations\201512261635268_WidgetFeature.Designer.cs">
+      <DependentUpon>201512261635268_WidgetFeature.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Action\SystemAction.cs" />
     <Compile Include="Models\Action\UserAction.cs" />
@@ -126,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511261710307_FixedAppUserEmail.resx">
       <DependentUpon>201511261710307_FixedAppUserEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512261635268_WidgetFeature.resx">
+      <DependentUpon>201512261635268_WidgetFeature.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
