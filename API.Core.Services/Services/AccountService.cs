@@ -47,7 +47,6 @@ namespace API.Core.Service.Services
 
         }
 
-
         public bool DisableUser(Domain.Models.UserIdentity.AppUser user)
         {
             try
@@ -118,28 +117,6 @@ namespace API.Core.Service.Services
             }
         }
 
-        //public bool RegisterUserAccount(AppUserRegistrationModel appUserRegistrationModel)
-        //{
-        //    try
-        //    {
-        //        var appUserModel = new Domain.Models.UserIdentity.AppUser
-        //        {
-        //            Enabled = true
-                    
-        //        };
-        //        var appUser = Mapper.Map<AppUser>(appUserModel);
-        //        appUser.UserName = appUserRegistrationModel.Username;
-        //        appUser.Email = appUserRegistrationModel.Email;
-        //        var result = _authRepository.RegisterUser(appUser, appUserRegistrationModel.Password);
-        //        return result.Succeeded;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.Error("Error registering user: " + ex.InnerException);
-        //        throw;
-        //    }
-        //}
-
         public Domain.Models.UserIdentity.AppUser FindUser(string userName, string password)
         {
             try
@@ -183,16 +160,34 @@ namespace API.Core.Service.Services
         {
             try
             {
+                bool result;
                 var user = _authRepository.FindUserByUsername(userName);
                 user.Firstname = editUser.Firstname;
                 user.Lastname = editUser.Lastname;
-                
 
-                var result = _authRepository.UpdateUser(user);
+                result = _authRepository.UpdateUser(user);
+
                 if (result)
                     return Mapper.Map<Domain.Models.UserIdentity.AppUser>(user);
                 
                 return null;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error updating user: " + ex.InnerException);
+                throw;
+            }
+
+        }
+
+        public bool ChangeUserPassword(string userName, string oldPassword, string newPassword)
+        {
+            try
+            {
+                var user = _authRepository.FindUserByUsername(userName);
+
+                return _authRepository.UpdateUserPassword(user, oldPassword, newPassword);
+
             }
             catch (Exception ex)
             {

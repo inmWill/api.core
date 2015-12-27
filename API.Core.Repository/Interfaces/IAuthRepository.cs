@@ -19,7 +19,11 @@ namespace API.Core.Repository.Interfaces
 
         bool UpdateUser(AppUser user);
 
+        bool UpdateUserPassword(AppUser user, string oldPassword, string newPassword);
+
         AppUser FindUserByUsername(string userName);
+
+        AppUser FindUserByUserId(string userId);
 
         bool CheckUsernameAvailability(string userName);
 

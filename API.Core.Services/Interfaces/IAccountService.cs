@@ -19,5 +19,6 @@ namespace API.Core.Service.Interfaces
         bool RemoveRefreshToken(string refreshTokenId);
         RefreshToken FindRefreshToken(string refreshTokenId);
         AppUser UpdateUser(AppUserEditModel record, string userName);
+        bool ChangeUserPassword(string userName, string oldPassword, string newPassword);
     }
 }

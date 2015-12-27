@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Models\Base\BaseEntity.cs" />
+    <Compile Include="Models\EditModels\UserPasswordEditModel.cs" />
     <Compile Include="Models\EditModels\AppUserEditModel.cs" />
     <Compile Include="Models\UserIdentity\AuthorizedClient.cs" />
     <Compile Include="Models\UserIdentity\AppUser.cs" />

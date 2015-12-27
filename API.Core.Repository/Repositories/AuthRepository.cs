@@ -99,11 +99,30 @@ namespace API.Core.Repository.Repositories
             return user;
         }
 
+        public AppUser FindUserByUserId(string userId)
+        {
+            var user = _userManager.FindById(userId);
+            return user;
+        }
+
         public bool UpdateUser(AppUser user)
         {
-
             var result = _userManager.Update(user);
             return result.Succeeded;
+        }
+
+        public bool UpdateUserPassword(AppUser user, string oldPassword, string newPassword)
+        {
+            if (user.PasswordHash != _userManager.PasswordHasher.HashPassword(oldPassword))
+            {
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(newPassword);
+                var result = _userManager.Update(user);
+                return result.Succeeded;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public IEnumerable<string> GetUserRoles(string userId)

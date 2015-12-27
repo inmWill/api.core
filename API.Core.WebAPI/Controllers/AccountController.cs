@@ -94,7 +94,7 @@ namespace API.Core.Rest.WebAPI.Controllers
             try
             {
                 var identity = User.Identity;
-
+                
                 var result = _authService.UpdateUser(record, identity.GetUserName());
 
                 if (result != null)
@@ -105,6 +105,34 @@ namespace API.Core.Rest.WebAPI.Controllers
             catch (Exception ex)
             {
                 Logger.Error("Error updating active user account: {0}", ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Changes the user's password.
+        /// Route: api/Account/ChangePassword
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [API.Core.Rest.WebAPI.Attributes.Authorize]
+        public IHttpActionResult ChangePassword([FromBody] UserPasswordEditModel record)
+        {
+            try
+            {
+                var identity = User.Identity;
+
+                var result = _authService.ChangeUserPassword(identity.GetUserName(), record.OldPassword, record.NewPassword);
+
+                if (result)
+                    return Ok(result);
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error changing user password: {0}", ex.Message);
                 return BadRequest(ex.Message);
             }
         }
