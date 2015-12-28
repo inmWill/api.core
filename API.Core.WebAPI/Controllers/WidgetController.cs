@@ -36,5 +36,18 @@ namespace API.Core.Rest.WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        public IHttpActionResult GetByManufacturer(string whichManufacturer)
+        {
+            try
+            {
+                var widgets = _widgetService.Filter(m => m.Manufacturer == whichManufacturer);
+                return Ok(widgets);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error retrieving widgets: {0}", ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

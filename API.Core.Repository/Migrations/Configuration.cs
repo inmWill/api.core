@@ -32,13 +32,26 @@ namespace API.Core.Repository.Migrations
                  a => a.Id,
                 new Widget
                 {
+                    Id = 3,
                     Name = "My First Widget",
                     Description = "A test widget",
+                    Manufacturer = "Inmerge",
                     CreatedOn = DateTime.Now,
                     IpAddress = "192.0.0.1",
                     ModifiedById = 1,
                     ModifiedOn = DateTime.Now
-                }
+                },
+     new Widget
+{
+    Id = 4,
+    Name = "My Second Widget",
+    Description = "A test widget",
+    Manufacturer = "Woodsilks",
+    CreatedOn = DateTime.Now,
+    IpAddress = "192.0.0.1",
+    ModifiedById = 1,
+    ModifiedOn = DateTime.Now
+}
                 );
         }
 

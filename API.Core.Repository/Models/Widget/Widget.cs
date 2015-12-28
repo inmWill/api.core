@@ -14,6 +14,10 @@ namespace API.Core.Repository.Models.Widget
         [Required]
         [MaxLength(500)]
         public string Description { get; set; }
+
+       [MaxLength(250)]
+        public string Manufacturer { get; set; }
+
         public State State { get; set; }
     }
 }

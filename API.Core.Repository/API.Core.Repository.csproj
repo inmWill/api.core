@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201512261635268_WidgetFeature.Designer.cs">
       <DependentUpon>201512261635268_WidgetFeature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512281748366_widgetPropertyAdd.cs" />
+    <Compile Include="Migrations\201512281748366_widgetPropertyAdd.Designer.cs">
+      <DependentUpon>201512281748366_widgetPropertyAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Action\SystemAction.cs" />
     <Compile Include="Models\Action\UserAction.cs" />
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512261635268_WidgetFeature.resx">
       <DependentUpon>201512261635268_WidgetFeature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512281748366_widgetPropertyAdd.resx">
+      <DependentUpon>201512281748366_widgetPropertyAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

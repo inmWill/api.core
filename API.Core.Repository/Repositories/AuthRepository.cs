@@ -111,6 +111,13 @@ namespace API.Core.Repository.Repositories
             return result.Succeeded;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
         public bool UpdateUserPassword(AppUser user, string oldPassword, string newPassword)
         {
             if (user.PasswordHash != _userManager.PasswordHasher.HashPassword(oldPassword))
