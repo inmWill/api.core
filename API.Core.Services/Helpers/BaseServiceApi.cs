@@ -80,7 +80,7 @@ namespace API.Core.Service.Helpers
         {
             try
             {
-                var putValue = Mapper.Map<T>(value);
+                var putValue = Mapper.Map<T>(value); 
                 return DataRepository.Update<T>(putValue);
             }
             catch (Exception ex)
