@@ -13,8 +13,8 @@ namespace API.Core.Service.Helpers
         TDest Get(int id);
         TDest Post(TDest value);
         int Put(TDest value);
-        void Delete(int id);
-        void Delete(TDest value);
+        int Delete(int id);
+        int Delete(TDest value);
         IEnumerable<TDest> Filter(Expression<Func<T, bool>> predicate);
     }
 }

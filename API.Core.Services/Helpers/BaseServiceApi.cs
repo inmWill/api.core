@@ -90,11 +90,11 @@ namespace API.Core.Service.Helpers
             }
         }
 
-        public virtual void Delete(int id)
+        public virtual int Delete(int id)
         {
             try
             {
-                DataRepository.Delete<T>(t => t.Id == id);
+                return DataRepository.Delete<T>(t => t.Id == id);
             }
             catch (Exception ex)
             {
@@ -103,12 +103,12 @@ namespace API.Core.Service.Helpers
             }
         }
 
-        public virtual void Delete(TDest value)
+        public virtual int Delete(TDest value)
         {
             try
             {
                 var deleteValue = Mapper.Map<T>(value);
-                Delete(deleteValue.Id);
+                return Delete(deleteValue.Id);
             }
             catch (Exception ex)
             {

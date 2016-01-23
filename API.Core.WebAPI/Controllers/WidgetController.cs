@@ -83,6 +83,23 @@ namespace API.Core.Rest.WebAPI.Controllers
             }
         }
 
+        [HttpDelete]
+        [API.Core.Rest.WebAPI.Attributes.Authorize]
+        public IHttpActionResult Delete([FromUri] int Id)
+        {
+            try
+            {
+                //widget.State = State.Deleted;
+                var result = _widgetService.Delete(Id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error creating widget: {0}", ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
         public IHttpActionResult GetByManufacturer(string whichManufacturer)
         {
             try
