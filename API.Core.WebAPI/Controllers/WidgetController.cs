@@ -61,6 +61,28 @@ namespace API.Core.Rest.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates a widget, request must be authorized, expects a Widget object in the body of the request.
+        /// </summary>
+        /// <param name="widget"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [API.Core.Rest.WebAPI.Attributes.Authorize]
+        public IHttpActionResult Post([FromBody] Widget widget)
+        {
+            try
+            {
+                widget.State = State.Added;
+                var result = _widgetService.Post(widget);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error creating widget: {0}", ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
         public IHttpActionResult GetByManufacturer(string whichManufacturer)
         {
             try
