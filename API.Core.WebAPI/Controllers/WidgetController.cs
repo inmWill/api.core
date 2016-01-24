@@ -25,6 +25,10 @@ namespace API.Core.Rest.WebAPI.Controllers
             _widgetService = widgetService;
         }
 
+        /// <summary>
+        /// Gets all widgets
+        /// </summary>
+        /// <returns></returns>
         public IHttpActionResult GetAll()
         {
             try
@@ -83,14 +87,19 @@ namespace API.Core.Rest.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a widget, request must be authorized, expects a Widget Id in the uri of the request.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [API.Core.Rest.WebAPI.Attributes.Authorize]
-        public IHttpActionResult Delete([FromUri] int Id)
+        public IHttpActionResult Delete([FromUri] int id)
         {
             try
             {
                 //widget.State = State.Deleted;
-                var result = _widgetService.Delete(Id);
+                var result = _widgetService.Delete(id);
                 return Ok(result);
             }
             catch (Exception ex)
