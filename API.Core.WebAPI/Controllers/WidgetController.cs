@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using API.Core.Domain.Enums;
-using API.Core.Domain.Models.Widget;
+using API.Core.Domain.Models.Widgets;
 using API.Core.Service.Interfaces;
 using NLog;
 

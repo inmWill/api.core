@@ -37,6 +37,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -72,48 +80,34 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="SurveyBuilder\Features\AddClient\AddClient.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddClient.feature</DependentUpon>
-    </Compile>
-    <Compile Include="SurveyBuilder\Features\AddSurvey\AddSurvey.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddSurvey.feature</DependentUpon>
-    </Compile>
-    <Compile Include="SurveyBuilder\Features\AddClient\Steps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SurveyBuilder\Features\AddSurvey\AddSurveySteps.cs" />
-    <Compile Include="Widget\NUnitFixture1.cs" />
+    <Compile Include="Widgets\WIdgetServiceFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="SurveyBuilder\Features\AddClient\AddClient.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddClient.feature.cs</LastGenOutput>
-    </None>
-    <None Include="SurveyBuilder\Features\AddSurvey\AddSurvey.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddSurvey.feature.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\API.Core.Domain\API.Core.Domain.csproj">
       <Project>{9dc291b5-77e8-4e76-8620-dc499dfbe660}</Project>
       <Name>API.Core.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\API.Core.Repository\API.Core.Repository.csproj">
+      <Project>{c0a3a00d-3a18-4e35-9395-2271f49b280b}</Project>
+      <Name>API.Core.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\API.Core.Services\API.Core.Service.csproj">
       <Project>{e70c60ca-c46e-45e6-8040-bc580ae94e07}</Project>
       <Name>API.Core.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\API.Core.Utils.Automapper\API.Core.Utils.Automapper.csproj">
+      <Project>{f9b09b47-fc82-4f51-8a6d-be5723d01e4f}</Project>
+      <Name>API.Core.Utils.Automapper</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SurveyBuilder\Features\Add Question\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -141,6 +135,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

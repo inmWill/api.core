@@ -2,7 +2,7 @@
 using API.Core.Repository.Interfaces;
 using API.Core.Repository.Models.Base;
 
-namespace API.Core.Repository.Models.Widget
+namespace API.Core.Repository.Models.Widgets
 {
     public class Widget : BaseEntity, IIdentifier, IModifiedOn, ICreatedOn, IObjectWithState
     {

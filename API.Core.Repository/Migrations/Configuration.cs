@@ -8,7 +8,7 @@ namespace API.Core.Repository.Migrations
     using System.Linq;
     using API.Core.Domain.Enums;
     using API.Core.Repository.Models.Identity;
-    using API.Core.Repository.Models.Widget;
+    using Models.Widgets;
     using Utils.Cryptography;
     using DbContexts;
 

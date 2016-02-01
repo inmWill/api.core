@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using API.Core.Domain.Models.Base;
 using API.Core.Domain.Enums;
 
-namespace API.Core.Domain.Models.Widget
+namespace API.Core.Domain.Models.Widgets
 {
    public class Widget: BaseEntity
     {

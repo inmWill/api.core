@@ -2,7 +2,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using API.Core.Repository.Interfaces;
 using API.Core.Repository.Models.Identity;
-using API.Core.Repository.Models.Widget;
+using API.Core.Repository.Models.Widgets;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace API.Core.Repository.DbContexts
